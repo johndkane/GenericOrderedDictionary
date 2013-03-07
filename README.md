@@ -11,7 +11,7 @@ Quick Usage
 
     //...
 
-    Dictionary<int, string> od = new Dictionary<int, string>();
+    OrderedDictionary<int, string> od = new OrderedDictionary<int, string>();
     od.Add(2, "two");
     od.Add(new KeyValuePair<int, string>(3, "three"));
 
