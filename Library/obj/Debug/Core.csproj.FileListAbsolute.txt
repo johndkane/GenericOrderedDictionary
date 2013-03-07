@@ -1,0 +1,5 @@
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\GenericOrderedDictionary\obj\Debug\Core.csprojResolveAssemblyReference.cache
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\GenericOrderedDictionary\bin\Debug\Com.Github.Johndkane.OrderedDictionary.dll
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\GenericOrderedDictionary\bin\Debug\Com.Github.Johndkane.OrderedDictionary.pdb
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\GenericOrderedDictionary\obj\Debug\Com.Github.Johndkane.OrderedDictionary.dll
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\GenericOrderedDictionary\obj\Debug\Com.Github.Johndkane.OrderedDictionary.pdb

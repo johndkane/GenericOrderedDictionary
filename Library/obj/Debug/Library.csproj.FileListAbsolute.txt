@@ -1,0 +1,10 @@
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\Library\bin\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.dll
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\Library\bin\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.pdb
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.dll
+C:\Users\jkane.ECENTRICARTS\DropboxJdkaneHotmailCom\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.pdb
+C:\Users\John\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\John\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.dll
+C:\Users\John\Dropbox\scratch_dev\GenericOrderedDictionary\Library\bin\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.dll
+C:\Users\John\Dropbox\scratch_dev\GenericOrderedDictionary\Library\bin\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.pdb
+C:\Users\John\Dropbox\scratch_dev\GenericOrderedDictionary\Library\obj\Debug\Com.Github.Johndkane.Cobbled.OrderedDictionary.pdb
