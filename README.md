@@ -1,7 +1,10 @@
 OrderedDictionary&lt;TKey, TValue&gt;
 =================================
 
-Represents a strongly typed collection of key/value pairs that are accessible by the key or index, for the .NET Framework 2.0 and higher.
+Represents a strongly typed collection of key/value pairs that are accessible by the key or index, for the .NET Framework 2.0 and higher. 
+This collection also acts as a drop-in replacement for the standard System.Collections.Generic.Dictionary<TKey, TValue> class. 
+Enumeration of the collection yields items back in their originally built order. 
+This class provides an alternative to the weakly typed System.Collections.Specialized.OrderedDictionary class.
 
 Quick Usage
 --------------- 
