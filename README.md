@@ -9,7 +9,7 @@ This class provides an alternative to the weakly typed System.Collections.Specia
 Quick Usage
 --------------- 
 
-    using Com.Github.Johndkane.Cobbled;
+    using Com.Github.DataStructures;
     using System.Collections.Generic; 
 
     //...
@@ -29,9 +29,7 @@ Quick Usage
 General Information
 --------------- 
 
-This class has been cobbled together from existing .NET data structures internally wrapping: one Dictionary for random access operations, and and one List for ordered operations on the same set of key/value pairs. 
-
-The class is hosted in the Cobbled namespace to indicate it's not written from scratch or optimized beyond inherent optimizations present in the use of the List and Dictionary classes it wraps.
+This class has been cobbled together from existing .NET data structures internally wrapping: one Dictionary for random access operations, and and one List for ordered operations on the same set of key/value pairs; it's not written from scratch or optimized beyond inherent optimizations present in the use of the List and Dictionary classes it wraps.
 
 Contains one class library project hosting the Ordered Dictionary and one project for Unit tests. 
 

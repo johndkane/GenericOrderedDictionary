@@ -4,7 +4,7 @@ using System;
 
 namespace Tests
 {
-    using Com.Github.Johndkane.Cobbled;
+    using Com.Github.DataStructures;
     using NUnit.Framework;
 
     [TestFixture]

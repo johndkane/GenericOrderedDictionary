@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-
+ 
 // Internals visible to Test assembly 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Tests")]
 
-namespace Com.Github.Johndkane.Cobbled
+namespace Com.Github.DataStructures
 {
 
     /// <summary>
