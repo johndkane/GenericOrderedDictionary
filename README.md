@@ -38,6 +38,6 @@ The unit test library uses NUnit and is hosted on .NET 4 to leverage syntax feat
 Developers
 --------------- 
 
-Project files: Visual Studio 2010 +  
-Ordered Dictionary Class Library: C#, .NET 2.0  
-Tests Class Library: C#, .NET 4.0, NUnit 2.5.9
+Project files: Visual Studio 2017 +  
+Ordered Dictionary Class Library written in: C# targeting .NET 2.0  
+Tests Class Library: C# .NET 4.0, NUnit 3 Framework and Visual Studio Adapter
