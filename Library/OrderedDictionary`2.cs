@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
- 
+
 // Internals visible to Test assembly 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Tests")]
 
@@ -59,7 +58,7 @@ namespace Com.Github.DataStructures
             int indexCurrent = 0;
             bool foundMatch = false;
 
-            Predicate<KeyValuePair<TKey, TValue>> matcher = delegate(KeyValuePair<TKey, TValue> kvp)
+            Predicate<KeyValuePair<TKey, TValue>> matcher = delegate (KeyValuePair<TKey, TValue> kvp)
             {
                 if (ReferenceEquals(null, key) && ReferenceEquals(null, kvp.Key) || !ReferenceEquals(null, key) && key.Equals(kvp.Key))
                 {
@@ -262,8 +261,18 @@ namespace Com.Github.DataStructures
             }
             set
             {
-                if (this.internalDictionary.ContainsKey(key))
+                TValue foundValue;
+                if (this.internalDictionary.TryGetValue(key, out foundValue))
+                {
+                    KeyValuePair<TKey, TValue> soughtListItem = new KeyValuePair<TKey, TValue>(key, foundValue);
+
+                    int index;
+                    if ((index = this.internalList.FindIndex(0, kvp => kvp.Equals(soughtListItem))) < 0)
+                        throw new Exception("out of sync");
+
                     this.internalDictionary[key] = value;
+                    this.internalList[index] = new KeyValuePair<TKey, TValue>(key, value);
+                }
                 else
                 {
                     KeyValuePair<TKey, TValue> newItem = new KeyValuePair<TKey, TValue>(key, value);
