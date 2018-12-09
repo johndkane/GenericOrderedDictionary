@@ -305,26 +305,68 @@ namespace Tests
         }
 
         [Test]
-        public void ReplaceItem()
+        public void ReplaceItem_ByIndex()
         {
-            OrderedDictionary<string, string> dictionary = new OrderedDictionary<string, string>();
+            OrderedDictionary<string, string> od = new OrderedDictionary<string, string>();
 
-            dictionary.Add("1", "one");
-            dictionary.Add("2", "two");
+            od.Add("1", "one");
+            od.Add("2", "two");
 
             KeyValuePair<string, string> three = new KeyValuePair<string, string>("3", "three");
 
-            dictionary[1] = three; // replace key "2" with key "3"
+            od[1] = three; // replace key "2" with key "3"
 
-            Assert.AreEqual(2, dictionary.internalDictionary.Count);
-            Assert.AreEqual(2, dictionary.internalList.Count);
+            Assert.AreEqual(2, od.internalDictionary.Count);
+            Assert.AreEqual(2, od.internalList.Count);
 
             //1
-            Assert.AreEqual("3", dictionary.internalList[1].Key);
-            Assert.IsTrue(dictionary.internalDictionary.Keys.Any(k => "3".Equals(k)));
-            Assert.IsFalse(dictionary.internalDictionary.Keys.Any(k => "2".Equals(k)));
+            Assert.AreEqual("3", od.internalList[1].Key);
+            Assert.AreEqual("three", od.internalList[1].Value);
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "3".Equals(k)));
+            Assert.IsFalse(od.internalDictionary.Keys.Any(k => "2".Equals(k)));
             //0
-            Assert.AreEqual("1", dictionary.internalList[0].Key);
+            Assert.AreEqual("1", od.internalList[0].Key);
+        }
+
+        [Test]
+        public void ReplaceItem_ByKey()
+        {
+            OrderedDictionary<string, string> od = new OrderedDictionary<string, string>();
+
+            od.Add("str1", "one");
+            od.Add("str2", "two");
+            od.Add("str3", "three");
+
+            Assert.True(od.Count == od.internalDictionary.Count && od.internalDictionary.Count == od.internalList.Count);
+
+            Assert.AreEqual("str1", od.internalList[0].Key);
+            Assert.AreEqual("str2", od.internalList[1].Key);
+            Assert.AreEqual("str3", od.internalList[2].Key);
+
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str1".Equals(k)));
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str2".Equals(k)));
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str3".Equals(k)));
+
+            Assert.AreEqual(od.internalDictionary["str1"], "one");
+            Assert.AreEqual(od.internalDictionary["str2"], "two");
+            Assert.AreEqual(od.internalDictionary["str3"], "three");
+
+            od["str2"] = "bumblebee";
+
+            Assert.True(od.Count == od.internalDictionary.Count && od.internalDictionary.Count == od.internalList.Count);
+
+            Assert.AreEqual("str1", od.internalList[0].Key);
+            Assert.AreEqual("str2", od.internalList[1].Key);
+            Assert.AreEqual("str3", od.internalList[2].Key);
+
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str1".Equals(k)));
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str2".Equals(k)));
+            Assert.IsTrue(od.internalDictionary.Keys.Any(k => "str3".Equals(k)));
+
+            Assert.AreEqual(od.internalDictionary["str1"], "one");
+            Assert.AreEqual(od.internalDictionary["str2"], "bumblebee");
+            Assert.False(od.internalDictionary.ContainsValue("two"));
+            Assert.AreEqual(od.internalDictionary["str3"], "three");
         }
 
         [Test]
