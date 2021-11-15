@@ -3,8 +3,14 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/vsts/pipelines/apps/windows/dot-net
 
+parameters:
+  - name: includeBuildTemplate
+    displayName: 'Use VS build template?'
+    type: boolean
+    default: false
+
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -12,22 +18,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@0
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- ${{ if eq(parameters.includeBuildTemplate, true) }}:
+  - template: 'azure-pipelines.VSBuild.yml'
+    parameters:
+      runTests: true
 
 - task: PublishPipelineArtifact@1
   enabled: false
