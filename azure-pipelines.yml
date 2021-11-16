@@ -7,7 +7,7 @@ parameters:
   - name: includeBuildTemplate
     displayName: 'Use VS build template?'
     type: boolean
-    default: false
+    default: true
 
 pool:
   vmImage: 'windows-latest'
