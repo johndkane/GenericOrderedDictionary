@@ -21,7 +21,7 @@ steps:
 - ${{ if eq(parameters.includeBuildTemplate, true) }}:
   - template: 'azure-pipelines.VSBuild.yml'
     parameters:
-      runTests: true
+      runTests: true    
 
 - task: PublishPipelineArtifact@1
   enabled: false

@@ -3,7 +3,7 @@ parameters:
   type: boolean
   default: true
 
-
+steps:
 - task: NuGetToolInstaller@0
 
 - task: NuGetCommand@2
