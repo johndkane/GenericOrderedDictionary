@@ -1,6 +1,6 @@
 name: Relay external mentions
 on: {issue_comment: {types: [created]}}
-permissions: {issues: write, metadata: read}
+permissions: {issues: write, contents: read}
 
 jobs:
   relay:
