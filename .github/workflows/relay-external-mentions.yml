@@ -1,4 +1,4 @@
-name: Relay external @mentions
+name: Relay external @mentions using 'github user hanndle' - 'github team handle' map file (.github/relay-external-mentions.map.json)
 
 on:
   #issues:                         # issue bodies
