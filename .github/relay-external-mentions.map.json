@@ -1,0 +1,5 @@
+{
+  "reviewer-relay": "nm-tagged-reviewers",
+  "admin-relay"   : "nm-tagged-admins",
+  "repo-relay"    : null            // special: expand to all repo users
+}
