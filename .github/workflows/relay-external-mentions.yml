@@ -26,7 +26,7 @@ jobs:
       - name: Load relay map
         id: load
         run: |
-          echo "RELAYS_B64=$(base64 -w0 .github/relay-map.json)" >>"$GITHUB_OUTPUT"
+          echo "RELAYS_B64=$(base64 -w0 .github/relay-external-mentions.map.json)" >>"$GITHUB_OUTPUT"
 
       - uses: actions/github-script@v7
         env:
