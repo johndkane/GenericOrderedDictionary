@@ -1,0 +1,102 @@
+name: Relay external @mentions
+
+on:
+  #issues:                         # issue bodies
+  #  types: [opened, edited]
+  pull_request:                   # PR bodies
+    types: [opened, edited]
+  issue_comment:                  # any issue / PR comment
+    types: [created]
+  pull_request_review_comment:    # “Files changed” threads
+    types: [created]
+  #commit_comment:                 # commit-level comments
+  #  types: [created]
+
+permissions:
+  issues: write        # post the relay
+  contents: read       # list repo collaborators / teams
+
+jobs:
+  relay:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Load relay map
+        id: load
+        run: |
+          echo "RELAYS_B64=$(base64 -w0 .github/relay-map.json)" >>"$GITHUB_OUTPUT"
+
+      - uses: actions/github-script@v7
+        env:
+          ORG_READ_PAT: ${{ secrets.ORG_READ_PAT }}          # PAT with read:org
+          RELAYS_B64  : ${{ steps.load.outputs.RELAYS_B64 }}
+        with:
+          script: |
+            const RELAYS = JSON.parse(Buffer.from(process.env.RELAYS_B64, 'base64').toString());
+
+            /* ---------- helpers ---------- */
+            const ev = context.eventName;
+            const p  = context.payload;
+            const {owner, repo} = context.repo;
+            const body = p.comment?.body ?? p.issue?.body ?? p.pull_request?.body;
+            if (!body) return;
+
+            const hit = Object.keys(RELAYS).find(u => body.includes(`@${u}`));
+            if (!hit) return;                       // no relay tag found
+
+            const orgKit = github.getOctokit(process.env.ORG_READ_PAT);
+            const paginate = async (fn, params) => {
+              let pg = 1, out = [];
+              for (;;) {
+                const {data, headers} = await fn({...params, per_page: 100, page: pg});
+                out = out.concat(data);
+                if (!headers.link?.includes('rel="next"')) break;
+                pg++;
+              }
+              return out;
+            };
+
+            const teamMembers = async slug =>
+              (await paginate(orgKit.rest.teams.listMembersInOrg,
+                              {org: owner, team_slug: slug}))
+              .map(u => `@${u.login}`);
+
+            const repoMembers = async () => {
+              const collabs = await paginate(github.rest.repos.listCollaborators,
+                                              {owner, repo, affiliation: 'all'});
+              const teams   = await paginate(github.rest.repos.listTeams,
+                                              {owner, repo});
+              const all = new Set(collabs.map(u => `@${u.login}`));
+              for (const t of teams)
+                (await teamMembers(t.slug)).forEach(u => all.add(u));
+              return [...all];
+            };
+
+            /* ---------- build recipient list ---------- */
+            const targets = new Set();
+            if (hit === 'repo-relay') {
+              (await repoMembers()).forEach(u => targets.add(u));
+            } else {
+              const slug = RELAYS[hit];
+              if (slug) (await teamMembers(slug)).forEach(u => targets.add(u));
+            }
+            if (!targets.size) return;
+
+            /* ---------- craft relay message ---------- */
+            const from = p.comment?.user.login ?? p.sender.login;
+            const num  = p.issue?.number ?? p.pull_request?.number ?? null;
+            const sha  = p.comment?.commit_id ?? null;
+            const url  = p.comment?.html_url ?? p.issue?.html_url ?? p.pull_request?.html_url;
+            const label = num ? `**${owner}/${repo} #${num}**`
+                              : `**${owner}/${repo}@${sha.slice(0,7)}**`;
+
+            const clean = body.replace(new RegExp(`@${hit}\\b`, 'g'), '').trim();
+            const relay = `🔔 relay from @${from} in ${label}\n${url}\n\n${[...targets].join(' ')}\n\n${clean}`;
+
+            if (num) {
+              await github.rest.issues.createComment({owner, repo, issue_number: num, body: relay});
+            } else {
+              await github.rest.repos.createCommitComment({owner, repo, commit_sha: sha, body: relay});
+            }
